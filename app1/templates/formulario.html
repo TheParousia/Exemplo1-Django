@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+<!-- Definindo o título da página  -->
+{% block title %}
+Formulário do Cartão - GET
+{% endblock %}
+
+{% block titulo %}
+Formulário do Cartão - GET
+{% endblock %}
+
+{% block conteudo %}
+
+<form action="/cartao/" method="get">
+    <input type="text" name="nome" id="nome">
+    <input type="text" name="remetente" id="remetente">
+    <textarea
+    name="mensagem"
+    id="mensagem"
+    ></textarea>
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}

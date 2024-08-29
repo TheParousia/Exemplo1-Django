@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+<!-- Definindo o título da página  -->
+{% block title %}
+Mostrar Cartão - POST
+{% endblock %}
+
+{% block titulo %}
+Mostrar Cartão - POST
+{% endblock %}
+
+{% block conteudo %}
+<center>
+    <h1>De: {{remetente}}</h1>
+    <h1>Para: {{nome}}</h1>
+    <p>{{mensagem}}</p>
+</center>
+{% endblock %}

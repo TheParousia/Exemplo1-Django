@@ -1,0 +1,6 @@
+Este é o projeto de exemplo feito em sala
+para copia-lo por completo e executar em sua máquina crie um ambiente virtual e execute o comando
+ 
+pip install -r requirements.txt
+
+*o comando deve ser executado com o terminal na pasta raiz do projeto 

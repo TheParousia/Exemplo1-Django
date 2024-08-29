@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+
+<!-- Definindo o título da página  -->
+{% block title %}
+Formulário do Cartão - POST
+{% endblock %}
+
+{% block titulo %}
+Formulário do Cartão - POST
+{% endblock %}
+
+{% block conteudo %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="nome" id="nome">
+    <input type="text" name="remetente" id="remetente">
+    <textarea
+    name="mensagem"
+    id="mensagem"
+    ></textarea>
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}
