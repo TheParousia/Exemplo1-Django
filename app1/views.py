@@ -56,13 +56,12 @@ def formulario_post(request):
     if request.method == "POST":
         file_name = fs.save('img.jpg', request.FILES['imagem'])
         url = fs.url(file_name)
-
         print(url)
-
         cartao = models.Cartao()
         cartao.nome = request.POST.get("nome")
         cartao.remetente = request.POST.get("remetente")
         cartao.mensagem = request.POST.get("mensagem")
+        cartao.imagem = url
 
         cartao.save()
 
