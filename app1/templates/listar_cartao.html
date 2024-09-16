@@ -10,13 +10,26 @@ Lista de Cartões
 {% endblock %}
 
 {% block conteudo %}
-<a href="/formulario_post/">Cria novo cartão</a>
 
-<ul>
-    <li>Exemplo de item</li>
-    <li>Exemplo de item</li>
-    <li>Exemplo de item</li>
-    <li>Exemplo de item</li>
-    <li>Exemplo de item</li>
-</ul>
+<a href="/formulario_post/">
+    Cria novo cartão➕
+</a>
+
+{% for cartao in cartoes %}
+<fieldset>
+    <legend>Mensagem {{cartao.id}}</legend>
+    
+    <a href="/deletar/{{cartao.id}}">Deletar Cartão</a>
+    <br>
+    <br>
+    Nome: {{cartao.nome}}
+    <br>
+    Remetente: {{cartao.remetente}}
+    <br>
+    Mensagem: {{cartao.mensagem}}
+</fieldset>
+
+{% endfor %}
+
+
 {% endblock %}

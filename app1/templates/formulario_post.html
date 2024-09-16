@@ -11,14 +11,12 @@ Formulário do Cartão - POST
 
 {% block conteudo %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    <input type="file" name="imagem" id="imagem">
     <input type="text" name="nome" id="nome">
     <input type="text" name="remetente" id="remetente">
-    <textarea
-    name="mensagem"
-    id="mensagem"
-    ></textarea>
+    <textarea name="mensagem" id="mensagem"></textarea>
     <input type="submit" value="Enviar">
 </form>
 {% endblock %}
