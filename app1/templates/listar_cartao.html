@@ -1,5 +1,8 @@
 {% extends "main.html" %}
 
+{% load static %}
+
+
 <!-- Definindo o título da página  -->
 {% block title %}
 Listar Cartões
@@ -18,7 +21,7 @@ Lista de Cartões
 {% for cartao in cartoes %}
 <fieldset>
     <legend>Mensagem {{cartao.id}}</legend>
-    <img src="{{cartao.imagem}}" alt="" sizes="" srcset="">
+    <img src="{{cartao.imagem}}" alt="" sizes="" srcset="" style="height: 10em;width: 10em;object-fit: cover;">
     <a href="/deletar/{{cartao.id}}">Deletar Cartão</a>
     <br>
     <br>
