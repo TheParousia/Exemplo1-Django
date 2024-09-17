@@ -1,12 +1,12 @@
 import os
 from pathlib import Path
 from app1 import models
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.decorators import permission_required
-# ++
 from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 
 # ++
@@ -74,7 +74,16 @@ def formulario_post(request):
 
 def deletar_cartao(request, id):
     # Obtem os dados do banco de dados de um cartão com o id especifico
-    cartao = models.Cartao.objects.get(id=id)
+    # cartao = models.Cartao.objects.get(id=id)
+    cartao = get_object_or_404(models.Cartao, id=id)
+
+    nome_arquivo = os.path.basename(cartao.imagem.url)
+
+    caminho_completo = os.path.join(settings.MEDIA_ROOT, nome_arquivo)
+
+    if os.path.exists(caminho_completo):
+        os.remove(caminho_completo)
+
     cartao.delete()
 
     return redirect("listar_cartao")
