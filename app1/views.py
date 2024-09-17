@@ -102,6 +102,12 @@ def atualizar_cartao(request, id):
         cartao.remetente = request.POST.get("remetente")
         cartao.mensagem = request.POST.get("mensagem")
 
+        if 'imagem' in request.FILES:
+            print('imagem' in request.POST)
+            file_name = fs.save('img.jpg', request.FILES['imagem'])
+            url = fs.url(file_name)
+            cartao.imagem = url
+
         cartao.save()
 
         return redirect("listar_cartao")
