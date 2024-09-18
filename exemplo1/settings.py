@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app1',
+    'userCliente',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'exemplo1.urls'
@@ -121,14 +124,17 @@ USE_I18N = True
 
 USE_TZ = True
 
+#Configurações de rotas na utenticaçãi
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'cliente/login/'
+LOGIN_URL = 'cliente/login/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+STATIC_ROOT = BASE_DIR / 'files'
 STATIC_URL = 'static/'
 
-#Adicione as configurações da pastas para upload
+# Adicione as configurações da pastas para upload
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 

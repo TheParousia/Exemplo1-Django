@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block head_link %}
+<link data-msg="hello" rel="stylesheet" href="{% static 'css/estilo.css' %}">
+<script src="{% static 'js/script.js'%}" defer></script>
+{% endblock %}
 
 <!-- Definindo o título da página  -->
 {% block title %}
@@ -18,10 +22,13 @@ Lista de Cartões
     Cria novo cartão➕
 </a>
 
+
 {% for cartao in cartoes %}
 <fieldset>
     <legend>Mensagem {{cartao.id}}</legend>
-    <img src="{{cartao.imagem}}" alt="" sizes="" srcset="" style="height: 10em;width: 10em;object-fit: cover;">
+
+    <img src="{{cartao.imagem}}" style="height: 10em;width: 10em;object-fit: cover;">
+
     <a href="/deletar/{{cartao.id}}">Deletar Cartão</a>
     <a href="/atualizar/{{cartao.id}}">Atualizar Cartão</a>
     <br>

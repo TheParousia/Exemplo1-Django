@@ -1,0 +1,1 @@
+console.log("Java escript carregado com sucesso");

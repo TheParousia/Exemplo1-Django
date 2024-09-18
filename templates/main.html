@@ -8,6 +8,14 @@
         {% block title %}
         {% endblock %}
     </title>
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    
+    {% block head_link %}
+    {% endblock  %}
 </head>
 
 <body>
@@ -17,7 +25,16 @@
             {% endblock %}
         </h1>
 
-        <li><a href="/accounts/logout/">Deslogar</a></li>
+        {% if request.user.is_authenticated %}
+            <p>
+                Seja bem-vindo <b>{{request.user.username}}</b>
+            </p>
+            <li><a href="/cliente/logout/">Deslogar</a></li>
+        {% else %}
+            <li><a href="/cliente/login/">Logar</a></li>
+            <li><a href="/cliente/cadastro/">Se cadastrar</a></li>
+        {% endif %}
+
         <ul>
             <li><a href="/formulario/">Formulario - GET</a></li>
             <li><a href="/formulario_post/">Formulario - POST</a></li>

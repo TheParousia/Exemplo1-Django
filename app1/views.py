@@ -8,12 +8,11 @@ from django.contrib.auth.decorators import permission_required
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
+# Permissões
+from django.contrib.auth.decorators import login_required, permission_required
 
 # ++
 fs = FileSystemStorage()
-
-
-# Create your views here.
 
 
 def pagina1(request):
@@ -53,12 +52,14 @@ def cartao_post(request):
     return HttpResponse(template.render(contexto, request))
 
 
+@login_required
+@permission_required('cartao.pode_criar')
 def formulario_post(request):
 
     if request.method == "POST":
         file_name = fs.save('img.jpg', request.FILES['imagem'])
         url = fs.url(file_name)
-        print(url)
+
         cartao = models.Cartao()
         cartao.nome = request.POST.get("nome")
         cartao.remetente = request.POST.get("remetente")
@@ -71,7 +72,8 @@ def formulario_post(request):
 
     return render(request, "formulario_post.html")
 
-
+@login_required
+@permission_required('cartao.pode_deletar')
 def deletar_cartao(request, id):
     # Obtem os dados do banco de dados de um cartão com o id especifico
     # cartao = models.Cartao.objects.get(id=id)
@@ -88,7 +90,8 @@ def deletar_cartao(request, id):
 
     return redirect("listar_cartao")
 
-
+@login_required
+@permission_required('cartao.pode_atualizar')
 def atualizar_cartao(request, id):
     # Obtem os dados do banco de dados de um cartão com o id especifico
     cartao = models.Cartao.objects.get(id=id)
@@ -103,7 +106,12 @@ def atualizar_cartao(request, id):
         cartao.mensagem = request.POST.get("mensagem")
 
         if 'imagem' in request.FILES:
-            print('imagem' in request.POST)
+            nome_arquivo = os.path.basename(cartao.imagem.url)
+            caminho_completo = os.path.join(settings.MEDIA_ROOT, nome_arquivo)
+
+            if os.path.exists(caminho_completo):
+                os.remove(caminho_completo)
+
             file_name = fs.save('img.jpg', request.FILES['imagem'])
             url = fs.url(file_name)
             cartao.imagem = url
