@@ -8,8 +8,10 @@ class Cartao(models.Model):
     remetente = models.CharField(max_length=30)
     mensagem = models.TextField(max_length=255)
     imagem = models.ImageField(default='')
-    permissions = (
-        ("pode_deletar", "Permissão para deletar um cartão"),
-        ("pode_atualizar", "Permissão para atualizar um cartão"),
-        ("pode_criar", "Permissão para criar um cartão"),
-    )
+
+    class Meta:
+        permissions = (
+            ("pode_deletar", "Permissão para deletar um cartão"),
+            ("pode_atualizar", "Permissão para atualizar um cartão"),
+            ("pode_criar", "Permissão para criar um cartão"),
+        )
