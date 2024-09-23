@@ -124,10 +124,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-#Configurações de rotas na utenticaçãi
+# Configurações de rotas na utenticaçãi
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'cliente/login/'
-LOGIN_URL = 'cliente/login/'
+LOGOUT_REDIRECT_URL = '/cliente/login/'
+LOGIN_URL = '/cliente/login/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

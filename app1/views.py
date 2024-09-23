@@ -4,7 +4,6 @@ from app1 import models
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from django.contrib.auth.decorators import permission_required
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
@@ -53,9 +52,8 @@ def cartao_post(request):
 
 
 @login_required
-@permission_required('cartao.pode_criar')
+@permission_required('app1.pode_criar')
 def formulario_post(request):
-
     if request.method == "POST":
         file_name = fs.save('img.jpg', request.FILES['imagem'])
         url = fs.url(file_name)
@@ -72,9 +70,16 @@ def formulario_post(request):
 
     return render(request, "formulario_post.html")
 
+
 @login_required
-@permission_required('cartao.pode_deletar')
+@permission_required('app1.pode_deletar')
 def deletar_cartao(request, id):
+
+    if not request.user. has_perm('cartao.pode_deletar'):
+        print("Não tem: 'cartao.pode_deletar'")
+    else:
+        print("Tem: 'cartao.pode_deletar'")
+
     # Obtem os dados do banco de dados de um cartão com o id especifico
     # cartao = models.Cartao.objects.get(id=id)
     cartao = get_object_or_404(models.Cartao, id=id)
@@ -90,9 +95,16 @@ def deletar_cartao(request, id):
 
     return redirect("listar_cartao")
 
+
 @login_required
-@permission_required('cartao.pode_atualizar')
+@permission_required('app1.pode_atualizar')
 def atualizar_cartao(request, id):
+
+    if not request.user. has_perm('cartao.pode_atualizar'):
+        print("Não tem: 'cartao.pode_atualizar'")
+    else:
+        print("Tem: 'cartao.pode_atualizar'")
+
     # Obtem os dados do banco de dados de um cartão com o id especifico
     cartao = models.Cartao.objects.get(id=id)
 
